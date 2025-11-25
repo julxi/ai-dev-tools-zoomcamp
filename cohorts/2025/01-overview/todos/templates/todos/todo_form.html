@@ -1,0 +1,15 @@
+{% extends "todos/base.html" %}
+
+{% block title %}Edit TODO{% endblock %}
+
+{% block content %}
+<h2>{{ view.object|default:"Create TODO" }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Save</button>
+    <a href="{% url 'todos:home' %}">Cancel</a>
+</form>
+{% endblock %}

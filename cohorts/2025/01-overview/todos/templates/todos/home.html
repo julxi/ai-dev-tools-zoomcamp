@@ -1,0 +1,21 @@
+{% extends "todos/base.html" %}
+{% block content %}
+<p><a href="{% url 'todos:create' %}">Create new TODO</a></p>
+<ul>
+    {% for todo in todos %}
+    <li>
+        <strong>{{ todo.title }}</strong>
+        {% if todo.due_date %} — due {{ todo.due_date }}{% endif %}
+        {% if todo.resolved %} (resolved){% endif %}
+        <p>{{ todo.description }}</p>
+        <p>
+            <a href="{% url 'todos:edit' todo.pk %}">edit</a> |
+            <a href="{% url 'todos:delete' todo.pk %}">delete</a> |
+            <a href="{% url 'todos:toggle_resolved' todo.pk %}">toggle resolved</a>
+        </p>
+    </li>
+    {% empty %}
+    <li>No TODOs yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
